@@ -1,4 +1,4 @@
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useRef, useState, useEffect } from 'react';
 import {
   getDownloadURL,
@@ -21,7 +21,7 @@ import { app } from '../firebase';
 
 export default function Profile() {
   const fileRef = useRef(null);
-  const {currentUser, loading, error} = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   // console.log(file);
   const [filePerc, setFilePerc] = useState(0);
@@ -171,7 +171,7 @@ export default function Profile() {
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-      <input
+        <input
           onChange={(e) => setFile(e.target.files[0])}
           type='file'
           ref={fileRef}
@@ -180,7 +180,7 @@ export default function Profile() {
         />
         <img onClick={() => fileRef.current.click()}
           src={formData.avatar || currentUser.avatar} alt="profile" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' />
-          <p className='text-sm self-center'>
+        <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700'>
               Error Image upload (image must be less than 2 mb)
@@ -193,9 +193,9 @@ export default function Profile() {
             ''
           )}
         </p>
-        <input type="text" placeholder='username' defaultValue={currentUser.username} onChange={handleChange} id='username' className='border p-3 rounded-lg'  />
-        <input type="email" placeholder='email'  defaultValue={currentUser.email} onChange={handleChange} id='email' className='border p-3 rounded-lg'  />
-        <input type="password" placeholder='password' onChange={handleChange} id='password' className='border p-3 rounded-lg'  />
+        <input type="text" placeholder='username' defaultValue={currentUser.username} onChange={handleChange} id='username' className='border p-3 rounded-lg' />
+        <input type="email" placeholder='email' defaultValue={currentUser.email} onChange={handleChange} id='email' className='border p-3 rounded-lg' />
+        <input type="password" placeholder='password' onChange={handleChange} id='password' className='border p-3 rounded-lg' />
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'> {loading ? 'Loading...' : 'Update'} </button>
         {/* as we jst have to go to different page we crate link not button */}
         <Link className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95' to={"/create-listing"}>
@@ -239,10 +239,12 @@ export default function Profile() {
               >
                 <p>{listing.name}</p>
               </Link>
-  
+
               <div className='flex flex-col item-center'>
                 <button onClick={() => handleListingDelete(listing._id)} className='text-red-700 uppercase'>Delete</button>
-                <button className='text-green-700 uppercase'>Edit</button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className='text-green-700 uppercase'>Edit</button>
+                </Link>
               </div>
             </div>
           ))}
