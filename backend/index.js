@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from "./routes/user.route.js"
 import authRouter from "./routes/auth.route.js"
+import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.listen(3000, () => {
 
 app.use("/backend/user", userRouter);
 app.use("/backend/auth", authRouter);
+app.use('/backend/listing', listingRouter);
 
 //THIS IS MIDDLEWARE
 //error is the error coming from input of middleware
