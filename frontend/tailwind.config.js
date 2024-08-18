@@ -9,5 +9,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    //this makes sure text is present in two lines and on second line content is truncated to ...
+    require('@tailwindcss/line-clamp'),
+    // ...
+    ],
 }
